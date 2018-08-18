@@ -1,0 +1,117 @@
+<header class="main-header" >
+  <a routerLink="content" class="logo"><span class="logo-mini"><b>Ex</b>T</span>
+      <span class="logo-lg"><b>Flood</b>Relief</span></a>
+  <nav class="navbar navbar-static-top" role="navigation">
+    
+    <div class="navbar-custom-menu">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="#" data-target="#login" data-toggle="modal">
+            <span class="hidden-xs">Log In</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" data-target="#register" data-toggle="modal">
+            <span class="hidden-xs">Register</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<div class="modal" id="login">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header" style="background-color: #357ca5; color: white;">
+        <button type="button" class="close" data-dismiss="modal" >
+                  <span >&times;</span></button>        
+        <h4 class="modal-title">Sign in to start your session</h4>
+      </div>
+      
+      <form [formGroup]="lForm" (ngSubmit)="onLoginSubmit()">
+      <div class="modal-body">
+        <div class="form-group has-feedback">
+          <br />
+           <div [ngClass]="{'has-success': lForm.controls.loginmobile.valid ,'has-error': !lForm.controls.loginmobile.valid && focusMobileLogin,'form-group': true, 'has-feedback': true}">
+         <label *ngIf="lForm.controls.loginmobile.valid" class="control-label" for="loginmobile"><i class="fa fa-check"></i>Valid mobile number</label>
+         <label *ngIf="!lForm.controls.loginmobile.valid && focusMobileLogin" class="control-label" for="loginmobile"><i class="fa fa-times-circle-o"></i>Please enter a valid mobile number</label>
+            <input type="text" class="form-control" placeholder="Please enter your Mobile Number ..." id="loginmobile" name="loginmobile" formControlName="loginmobile" autocomplete="off" (focus)="onFocus(1)">
+        </div>
+      </div>
+
+        <div class="row">
+          <div class="col-xs-4">            
+          </div>
+
+          <div class="col-xs-4">
+            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+          </div>
+
+          <div class="col-xs-4">            
+          </div>
+        </div>
+      </div>
+      </form><br />
+      <div class="position">
+        <a class="text-center" (click)="gotoRegister()">Not a member? Register now.</a><br />
+      </div><br /> 
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="register">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header" style="background-color: #357ca5; color: white;">
+        <button type="button" class="close" data-dismiss="modal" >
+                  <span >&times;</span></button>        
+        <h4 class="modal-title">Register now to use the application</h4>
+      </div>
+      <form [formGroup]="rForm" (ngSubmit)="onSubmit()">
+      <div class="modal-body">
+        <label for id="orgName">Organization Name:</label>
+        <div [ngClass]="{'has-success': rForm.controls.orgName.valid ,'has-error': !rForm.controls.orgName.valid && focusName,'form-group': true, 'has-feedback': true}">
+         <label *ngIf="rForm.controls.orgName.valid" class="control-label" for="orgName"><i class="fa fa-check"></i>Valid Organization name</label>
+         <label *ngIf="!rForm.controls.orgName.valid && focusName" class="control-label" for="orgName"><i class="fa fa-times-circle-o"></i>Please enter a valid Organization name</label>
+          <input type="text" class="form-control" placeholder="Enter your Organization Name ..." id="orgName" name="orgName" formControlName="orgName" (focus)="onFocus(2)">
+        </div>
+
+        
+        <label for id="mobile">Mobile Number:</label>
+        <div [ngClass]="{'has-success': rForm.controls.mobile.valid ,'has-error': !rForm.controls.mobile.valid && focusMobile,'form-group': true, 'has-feedback': true}">
+         <label *ngIf="rForm.controls.mobile.valid" class="control-label" for="mobile"><i class="fa fa-check"></i>Valid mobile number</label>
+         <label *ngIf="!rForm.controls.mobile.valid && focusMobile" class="control-label" for="mobile"><i class="fa fa-times-circle-o"></i>Please enter a valid mobile number</label>
+          <input type="text" class="form-control" placeholder=" Enter your Mobile number ..." id="mobile" name="mobile" formControlName="mobile" (focus)="onFocus(3)">
+        </div>
+
+        <label for id="address">Address:</label>
+        <div [ngClass]="{'has-success': rForm.controls.address.valid ,'has-error': !rForm.controls.address.valid && focusAddress, 'form-group': true, 'has-feedback': true}">
+          <input type="text" class="form-control" placeholder="Enter your Address ..." id="address" name="address" formControlName="address"(focus)="onFocus(4)">
+        </div>
+
+        <label for id="pincode">Pincode:</label>
+        <div [ngClass]="{'has-success': rForm.controls.pincode.valid ,'has-error': !rForm.controls.pincode.valid && focusPin,'form-group': true, 'has-feedback': true}">
+          <input type="text" class="form-control" placeholder="Enter your Pincode ..." id="pincode" name="pincode" formControlName="pincode" (focus)="onFocus(5)">
+        </div>
+      </div>
+        
+        <div class="row">
+          <div class="col-xs-4">    
+          </div>
+          <div class="col-xs-4">
+            <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+          </div>
+          <div class="col-xs-4">    
+          </div>
+        </div>
+      </form><br />
+
+      <div class="position">
+        <a class="text-center" (click)="gotoLogin()">Already a member? Login.</a>
+      </div><br />
+    </div>
+  </div>
+</div>
