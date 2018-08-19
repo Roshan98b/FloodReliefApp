@@ -87,9 +87,9 @@ var ModelSchema = mongoose.Schema({
     }]
 });
 
-var Member = mongoose.model('request', ModelSchema);
+var Request = mongoose.model('request', ModelSchema);
 
-module.exports = Member;
+module.exports = Request;
 
 module.exports.addRequest = (model, callback) => {
 	model.save(callback);
@@ -97,11 +97,14 @@ module.exports.addRequest = (model, callback) => {
 
 module.exports.getAllRequests = (callback) => {
     var sort = {
-        date: -1
+        $sort: {
+            date: -1
+        }
     };
     Request.aggregate([sort], callback);
 };
 
 module.exports.findById = (id, callback) => {
-    Request.findById(id, callback);
+    var query = {_id: id};
+    Request.findOne(query, callback);
 }
