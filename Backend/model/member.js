@@ -36,3 +36,7 @@ module.exports.updateByMobile = (model, callback) => {
     let opt = model;
     Member.update(query, opt, callback);
 };
+
+module.exports.getByUid = (id, callback) => {
+    Member,findById(id, callback);
+};
