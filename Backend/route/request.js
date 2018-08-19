@@ -8,13 +8,19 @@ var Request  =require('../model/request');
 var router = express.Router();
 
 // post
-router.post('/submitreqeust', (req, res) => {
+router.post('/submitrequest', (req, res) => {
 	var temp = req.body;
 	temp._id = new mongoose.Types.ObjectId();
+	temp._Uid = mongoose.Types.ObjectId(req.body._Uid);
 	temp.date = new Date();
 	var obj = new Request(temp);
+	console.log(temp);
+	console.log(req.body);
 	Request.addRequest(obj, (err, model) => {
-		if(err) res.status(501).json(err);
+		if(err) {
+			console.log(err);
+			res.status(501).json(err);
+		}
 		else res.status(200).json({message: "Request Successfull"});
 	});
 });
@@ -24,15 +30,45 @@ router.get('/feed', (req, res) => {
 	var obj = [];
 	Request.getAllRequests((err, model) => {
 		for (let i of model) {
-			temp = model;
 			Member.findById(i._Uid, (err, mmodel) => {
-				temp.name = mmodel.name;
-				temp.mobile = mmodel.mobile;
-				temp.location = mmodel.location;
-				temp.pin = mmodel.pin;
+				if(err) {
+					console.log(err);
+					res.status(501).json(err);
+				} else {
+					temp._id = mmodel._id;
+					temp.name = mmodel.name;
+					temp.mobile = mmodel.mobile;
+					temp.pin = mmodel.pin;
+					temp.date = model.date;
+				}
 			});
 			obj.push(temp);
 			if(obj.length == model.length) res.status(200).json(obj);
+		}
+	});
+});
+
+router.get('/feedview', (req, res) => {
+	id = req.body._id;
+	Request.findById(id, (err, model) => {
+		if(err) {
+			console.log(err);
+			res.status(501).json(err);
+		} else {
+			var obj = {};
+			Member.getByUid(model._Uid, (err, mmodel) => {
+				if(err) {
+					console.log(err);
+					res.status(501).json(err);
+				} else {
+					obj = model;
+					obj.name = mmodel.name;
+					obj.pin = mmodel.pin;
+					obj.address = mmodel.address;
+					obj.mobile = mmodel.mobile;
+					res.status(200).json(obj);
+				}
+			});
 		}
 	});
 });

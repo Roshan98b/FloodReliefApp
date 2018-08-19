@@ -24,14 +24,44 @@ var ModelSchema = mongoose.Schema({
             },
             Undergarments: {
                 type: Number 
+            },
+            Gloves: {
+                type: Number
+            },
+            Towels: {
+                type: Number
+            },
+            Pants: {
+                type: Number
+            },
+            Shirts: {
+                type: Number
+            },
+            Blankets: {
+                type: Number
             }
         },
 		Utilities: {
-            Odomos: {
+            Odomous: {
                 type: Number
             },
-            SNapkin: {
-                type: Number 
+            Utensils: {
+                type: Number
+            },
+            Matchsticks: {
+                type: Number
+            },
+            Medicine: {
+                type: Number
+            },
+            Torch: {
+                type: Number
+            },
+            Bandages: {
+                type: Number
+            },
+            FirstAidKit: {
+                type: Number
             }
         },
 		Food: {
@@ -41,10 +71,16 @@ var ModelSchema = mongoose.Schema({
             Biscuits: {
                 type: Number 
             },
-            ReadyToEatMeals: {
+            Milk: {
                 type: Number
             },
-            Rusks: {
+            Bread: {
+                type: Number
+            },
+            Chips: {
+                type: Number
+            },
+            Water: {
                 type: Number
             }
         }                

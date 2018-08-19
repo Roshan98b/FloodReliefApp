@@ -10,14 +10,49 @@ var member = require('./member');
 router.use('', member);
 
 // Request route
-//router.use('', resquest);
+router.use('', request);
 
-router.post('/test',
-	(req, res) => {
-        console.log(req.body);
-        res.status(200).json({message: "Success"});
-	}
-);
+router.get('/test',
+        (req, res) => {
+                res.status(200).json({Array: 
+                [
+                        {
+                                name: "Success",
+                                mobile: "9765413245",
+                                date: "2018-12-01",
+                                pin: 560064,
+                                _id: "4bd6t4t465h465ds4rhrh4s6r5"
+                        },
+                        {
+                                name: "Success",
+                                mobile: "9765413245",
+                                date: "2018-12-01",
+                                pin: 560064,
+                                _id: "4bd6t4t465h465ds4rhrh4s6r5"
+                        },
+                        {
+                                name: "Success",
+                                mobile: "9765413245",
+                                date: "2018-12-01",
+                                pin: 560064,
+                                _id: "4bd6t4t465h465ds4rhrh4s6r5"
+                        },
+                        {
+                                name: "Success",
+                                mobile: "9765413245",
+                                date: "2018-12-01",
+                                pin: 560064,
+                                _id: "4bd6t4t465h465ds4rhrh4s6r5"
+                        },
+                        {
+                                name: "Success",
+                                mobile: "9765413245",
+                                date: "2018-12-01",
+                                pin: 560064,
+                                _id: "4bd6t4t465h465ds4rhrh4s6r5"
+                        }
+                ]});                                
+});
 
 
 module.exports = router;

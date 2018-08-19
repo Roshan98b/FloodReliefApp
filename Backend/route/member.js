@@ -9,7 +9,10 @@ var router = express.Router();
 //Login
 router.post('/login', (req, res) => {
 	Member.getbyMobile(req.body.mobile, (err, model) => {
-		if(err) res.status(501).json(err);
+		if(err) {
+			console.log(err);
+			res.status(501).json(err);
+		}
 		if(model == null) res.status(500).json({message: 'Mobile Number does not Exist'});  
 		else {
             console.log(model);
@@ -29,7 +32,10 @@ router.post('/member', (req, res) => {
     });
     console.log(member);
 	Member.addMember(member, (err, model) => {
-		if(err) res.status(501).json({error: "Error"});
+		if(err) {
+			console.log(err);
+			res.status(501).json({error: "Error"});
+		}
 		else res.status(200).json({message: "Registration Successfull"});
 	});
 });
