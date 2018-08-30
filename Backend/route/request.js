@@ -4,7 +4,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 
 var Member = require('../model/member'); 
-var Request  =require('../model/request');
+var Request  = require('../model/request');
 var router = express.Router();
 
 // post
@@ -29,39 +29,51 @@ router.post('/submitrequest', (req, res) => {
 router.get('/feed', (req, res) => {
 	var obj = [];
 	Request.getAllRequests((err, model) => {
-		for (let i of model) {
-			Member.findById(i._Uid, (err, mmodel) => {
-				if(err) {
-					console.log(err);
-					res.status(501).json(err);
-				} else {
-					temp._id = mmodel._id;
-					temp.name = mmodel.name;
-					temp.mobile = mmodel.mobile;
-					temp.pin = mmodel.pin;
-					temp.date = model.date;
-				}
-			});
-			obj.push(temp);
-			if(obj.length == model.length) res.status(200).json(obj);
+		if(err) {
+			console.log(err);
+			res.status(501).json(err);
+		} else {
+			for (let i of model) {
+				Member.findById(i._Uid, (err, mmodel) => {
+					if(err) {
+						console.log(err);
+						res.status(501).json(err);
+					} else {
+						var temp = {};
+						temp = i;
+						temp.name = mmodel.name;
+						temp.mobile = mmodel.mobile;
+						temp.pin = mmodel.pin;
+						temp.date = temp.date.toString();
+						console.log(temp);
+						obj.push(temp);
+						if(obj.length == model.length) res.status(200).json({Array: obj});
+					}
+				});
+			}
 		}
 	});
 });
 
-router.get('/feedview', (req, res) => {
+router.post('/feedview', (req, res) => {
 	id = req.body._id;
+	id = mongoose.Types.ObjectId(id);
+	console.log(req.body);
+	console.log('');
+
 	Request.findById(id, (err, model) => {
 		if(err) {
 			console.log(err);
 			res.status(501).json(err);
 		} else {
-			var obj = {};
+			var obj = {}; 
 			Member.getByUid(model._Uid, (err, mmodel) => {
 				if(err) {
 					console.log(err);
 					res.status(501).json(err);
 				} else {
 					obj = model;
+					obj.date = obj.date.toString();
 					obj.name = mmodel.name;
 					obj.pin = mmodel.pin;
 					obj.address = mmodel.address;
