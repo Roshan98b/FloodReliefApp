@@ -107,4 +107,4 @@ module.exports.getAllRequests = (callback) => {
 module.exports.findById = (id, callback) => {
     var query = {_id: id};
     Request.findOne(query, callback);
-}
+};
