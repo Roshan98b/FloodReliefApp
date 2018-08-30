@@ -17,7 +17,7 @@ var ModelSchema = mongoose.Schema({
     date: {
         type: Date
     },
-	items: [{
+	items: {
 		Clothes: {
             Sweater: {
                 type: Number
@@ -84,7 +84,7 @@ var ModelSchema = mongoose.Schema({
                 type: Number
             }
         }                
-    }]
+    }
 });
 
 var Request = mongoose.model('request', ModelSchema);

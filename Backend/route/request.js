@@ -40,11 +40,11 @@ router.get('/feed', (req, res) => {
 						res.status(501).json(err);
 					} else {
 						var temp = {};
-						temp._id = i._id;
+						temp = i;
 						temp.name = mmodel.name;
 						temp.mobile = mmodel.mobile;
 						temp.pin = mmodel.pin;
-						temp.date = i.date.toString();
+						temp.date = temp.date.toString();
 						console.log(temp);
 						obj.push(temp);
 						if(obj.length == model.length) res.status(200).json({Array: obj});

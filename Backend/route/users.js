@@ -12,8 +12,9 @@ router.use('', member);
 // Request route
 router.use('', request);
 
-router.get('/test',
+router.post('/test',
         (req, res) => {
+                console.log('Sup');
                 res.status(200).json({Array: 
                 [
                         {
